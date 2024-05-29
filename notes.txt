@@ -21,7 +21,50 @@ create a main.py file in the directory
 
 to run app in main file
     uvicorn main:app
-you can change the port to run the app
+you can change the port to run the app we use the --port flag
     uvicorn main:app --port=3000
 
-    
+in order to autoload any changes use the --reload flag
+    uvicorn main:app --reload
+
+
+you can get the documentation of the file if in the link provided pasted in browser add /docs
+        e.g http://127.0.0.1:8000/docs
+
+
+Routes connect URLs (Uniform Resource Locators) to specific functions in your code. 
+These functions define the logic and behavior of your API.
+
+FastAPI leverages the async/await syntax in Python to create asynchronous functions. 
+The async def keyword defines an asynchronous function, and the await keyword is used to pause execution when waiting for a slow operation.
+
+FastAPI allows you to define more complex routes, handle different HTTP methods (POST, PUT, DELETE), 
+handle data validation, and build more feature-rich APIs.
+
+http://127.0.0.1:8000/docs#/default/one_messo_get
+        http is the protocol
+        127.0.0.1 is the localhost
+        8000 is the port 
+        docs is inorder to obtain the documentation
+        one is the name of the function name 
+        messo is the path defined in the @app.get("/messo")
+        get is the request
+
+
+Routes are like designated addresses within your API that handle user requests.
+
+@app.get("/item/{itemId}"):
+    @app.get : This is a decorator provided by FastAPI. It indicates that the following function handles GET requests (requests to retrieve data).
+    /item/{itemId} : This is the path for the route.
+    /item/: This static part defines a base path for this route related to "items".
+    {itemId} : This part is a placeholder enclosed in curly braces {}. 
+    It represents a dynamic variable that will capture a value from the URL when a request is made.
+            in the browser http://127.0.0.1:8000/item/5
+                        {"item":"5"} is returned meaning 5 is a string we can make it an integer by making it an int in the function parameter
+                               async def get_item(itemId:int):
+                               if want a stringb use str 
+
+A specific endpoint should come before a dynamic end point if using similar path i.e
+
+        @app.get("/item/me")
+        @app.get("/item/{itemId}")
