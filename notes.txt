@@ -1,0 +1,27 @@
+make a directory of the project
+make a virtual environment in the directory
+make a file named requirements.txt 
+    on it write
+        fastapi
+        uvicorn[standard]
+        
+in the terminal in the directory of the project 
+    .\env\Scripts\activate
+     pip install -r requirements.txt
+
+
+create a main.py file in the directory
+    from fastapi import FastAPI
+    app= FastAPI()
+
+    @app.get("/")
+
+    async def root():
+        return {"message":"hello world"}
+
+to run app in main file
+    uvicorn main:app
+you can change the port to run the app
+    uvicorn main:app --port=3000
+
+    
