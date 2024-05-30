@@ -48,3 +48,16 @@ async def get_food(foodName:foodEnum):
         return{"foodName":foodName,"mesaage":"you are not healthy"}
 
 
+
+
+
+fakenames=[{"firstName":"Jos"},{"firstName":"Joe"},{"firstName":"Mary"}]
+
+@app.get("/items")
+async def getItems(skip:int=0, limit:int=10):
+    return fakenames[skip: skip+limit]
+#http://127.0.0.1:8000/items?skip=2
+    #returns [{"firstName":"Mary"}]
+
+#http://127.0.0.1:8000/items?skip=0
+    #returns [{"firstName":"Jos"},{"firstName":"Joe"},{"firstName":"Mary"}]

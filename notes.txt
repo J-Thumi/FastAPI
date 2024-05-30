@@ -68,3 +68,31 @@ A specific endpoint should come before a dynamic end point if using similar path
 
         @app.get("/item/me")
         @app.get("/item/{itemId}")
+
+Consider:
+    @app.get("/item/me")
+    async def current():
+        return {"message":"I am the current user"}
+
+    @app.get("/item/{itemId}")
+    async def get_item(itemId:int):
+        return {"item":itemId}
+
+
+http://127.0.0.1:8000/item/me 
+    returns {"message":"I am the current user"}
+http://127.0.0.1:8000/item/bob
+    returns {"detail":[{"type":"int_parsing","loc":["path","itemId"],"msg":"Input should be a valid integer, unable to parse string as an integer","input":"bob"}]}
+    because we needed an int and bob cannot be changed to int
+http://127.0.0.1:8000/item/6
+    returns {"item":6}
+
+
+If the dynamic was written first, the me would be treated as though it was in the dynamic whereelse we wanted the current to run
+ 
+
+@app.get("/item/{itemId}")
+    the itemId is a path parameter and it must be def in the parameters of the function
+
+
+A query parameter is one that is not in the path but is in the function
