@@ -2,6 +2,7 @@ from enum import Enum
 
 from fastapi import FastAPI
 
+from typing import Optional
 app= FastAPI()
 
 @app.get("/messo")
@@ -61,3 +62,10 @@ async def getItems(skip:int=0, limit:int=10):
 
 #http://127.0.0.1:8000/items?skip=0
     #returns [{"firstName":"Jos"},{"firstName":"Joe"},{"firstName":"Mary"}]
+
+
+@app.get("/items/{itemId}")
+async def list(itemId:str,q:Optional[str]=None):
+    if q:
+        return {"itemid":itemId,"q":q}
+    return {"itemid":itemId}
