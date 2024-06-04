@@ -1,7 +1,7 @@
 from enum import Enum
-
+from typing import Optional
 from fastapi import FastAPI
-
+from pydantic import BaseModel
 from typing import Optional
 app= FastAPI()
 
@@ -69,3 +69,17 @@ async def list(itemId:str,q:Optional[str]=None):
     if q:
         return {"itemid":itemId,"q":q}
     return {"itemid":itemId}
+
+
+
+
+#REQUEST BODY
+class Item(BaseModel):
+    name:str
+    description:Optional[str]=None
+    price:float
+    tax:float |  None=None   
+
+app.post('./items')
+async def createItem():
+    return item
