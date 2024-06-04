@@ -78,7 +78,8 @@ class Item(BaseModel):
     name:str
     description:Optional[str]=None
     price:float
-    tax:float |  None=None   
+    tax:float |  None = None   #also for optional
+    
 
 app.post('./items')
 async def createItem():
